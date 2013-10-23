@@ -1,0 +1,82 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        std::sort(numbers.begin(),numbers.end());
+        int leftTarget;
+        int n = numbers.size();
+        int i;
+        int ind1,ind2;
+        for(i=0;i<n;i++){
+            ind1 = i+1;
+            ind2 = nextPosition(target-numbers[i],numbers,i+1);
+            if(ind2 == -1) continue;
+            else{
+                ind2 = ind2 + 1;
+                break;
+            }
+        }
+        vector<int> res;
+        res.push_back(ind1);
+        res.push_back(ind2);
+        return res;
+        
+    }
+    int nextPosition(int targetNum,vector<int>&number,int bPosition){
+        int ePosition = number.size() - 1;
+        int mPosition;
+        while(bPosition <= ePosition){
+            mPosition = (bPosition+ePosition)/2;
+            if(number[mPosition] == targetNum) return mPosition;
+            if(number[mPosition] < targetNum){
+                bPosition = mPosition;
+            }else{
+                ePosition = mPosition;
+            }
+        }
+        return -1;
+    } 
+};
+
+
+
+
+
+accepted solution:
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+       vector<int> tmp(numbers);
+       
+       std::sort(numbers.begin(),numbers.end());
+       int b=0;
+       int e=numbers.size()-1;
+       int first,second;
+       vector<int> res;
+       while(b<e){
+           if(numbers[b]+numbers[e]>target){
+               e=e-1;
+           }else{
+               if(numbers[b]+numbers[e]<target){
+                   b=b+1;
+               }else
+               {
+                   first = numbers[b];
+                   second = numbers[e];
+                   break;
+               }
+           }
+       }
+       int length = tmp.size();
+       int tag = 0;
+       for(int i=0;i<length;i++){
+           if(tmp[i]==first || tmp[i]==second){
+              res.push_back(i+1);
+              tag=tag+1;
+              if(tag==2) return res;
+           }
+          
+       }
+    }
+};

@@ -1,0 +1,25 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int maxDepth(TreeNode *root) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(root == NULL) return 0;
+        int leftDepth=0,rightDepth=0;
+        if(root->left){
+            leftDepth = maxDepth(root->left);
+        }
+        if(root->right){
+            rightDepth = maxDepth(root->right);
+        }
+        if(leftDepth > rightDepth) return leftDepth+1;
+        else return rightDepth+1;
+    }
+};

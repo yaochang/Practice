@@ -1,0 +1,17 @@
+class Solution {
+public:
+    char *strStr(char *haystack, char *needle) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        int targetLen = strlen(haystack);
+        int needleLen = strlen(needle);
+        if(targetLen==0 && needleLen==0) return haystack;
+        int i,j;
+        for(i=0;i<=targetLen-needleLen;i++){
+            for(j=0;j<needleLen;j++){
+                if(haystack[i+j] != needle[j]) break;
+            }
+            if(j==needleLen) return &haystack[i];
+        }
+        return NULL;
+    }
+};

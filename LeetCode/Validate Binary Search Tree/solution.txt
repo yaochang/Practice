@@ -1,0 +1,31 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isValidBST(TreeNode *root) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(root == NULL) return true;
+        if(root->left==NULL && root->right==NULL) return true;
+        int left=-100000,right=100000;
+        TreeNode* tmpLeft = root->left;
+        TreeNode* tmpRight = root->right;
+        while(tmpLeft){
+            left = tmpLeft->val;
+            tmpLeft = tmpLeft->right;
+        }
+        while(tmpRight){
+            right = tmpRight->val;
+            tmpRight = tmpRight->left;
+        }
+        if((root->val)>left && (root->val)<right && isValidBST(root->left) && isValidBST(root->right)) return true;
+        else return false;
+        
+    }
+};

@@ -1,0 +1,37 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(x<0) return false;
+        int len = 0;
+        int cur = x;
+        while(cur>0){
+            cur = cur / 10;
+            len = len + 1;
+        }
+        int i,j;
+        if(len==1) return true;
+        int a,b;
+        cur = x;
+        int count=0;
+        for(i=1;i<=len/2 + 1;i++){
+            cur = x;
+            count = i-1;
+            while(count>0){
+                cur = cur / 10;
+                count--;
+            }
+            a = cur % 10;
+            j = len+1-i;
+            count = j-1;
+            cur = x;
+            while(count>0){
+                cur = cur / 10;
+                count--;
+            }
+            b = cur % 10;
+            if(a !=b ) return false;
+        }
+        return true;
+    }
+};

@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> grayCode(int n) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        vector<int> result;
+        if(n==0){
+            result.push_back(0);
+            return result;
+        }
+        result.push_back(0);
+        result.push_back(1);
+        int cur = 1;
+        int curNum = 2;
+        int j;
+        int plus;
+        while(cur < n){
+            curNum = result.size();
+            j = cur;
+            plus = 1;
+            while(j>0){
+                plus = plus * 2;
+                j--;
+            }
+            j = curNum - 1;
+            while(j>=0){
+                result.push_back(result[j]+plus);
+                j--;
+            }
+            cur = cur + 1;
+        }
+        return result;
+    }
+};

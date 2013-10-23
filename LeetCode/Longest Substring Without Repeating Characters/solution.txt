@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        int Map[260];
+        int maxLen = 0;
+        const int notFound = -1;
+        for(int i=0;i<260;i++){
+            Map[i] = notFound;
+        }
+        int currentLen=0;
+        for(int i=0;i<s.length();i++){
+            if(Map[s[i]]==notFound){
+                currentLen++;
+                Map[s[i]] = i;
+                if(currentLen > maxLen){
+                    maxLen = currentLen;
+                }
+            }else{
+                for(int j=i-currentLen;j<Map[s[i]];j++){
+                    Map[s[j]] = notFound;
+                }
+                currentLen = i - Map[s[i]];
+                Map[s[i]] = i;
+            }
+        }
+        return maxLen;
+    }
+};

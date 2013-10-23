@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxSubArray(int A[], int n) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        int max=A[0];
+        int current=A[0];
+    
+        for(int i=1;i<n;i++){
+            if(current<0){
+                current = A[i];
+            }else{
+                current = current+A[i];
+            }
+            
+            if(current > max) max = current;
+        }
+        return max;
+    }
+};

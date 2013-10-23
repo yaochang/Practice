@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int numDistinct(string S, string T) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+      int sLen = S.length();
+      int tLen = T.length();
+      int a[tLen][sLen];
+      memset(a,0,sizeof(a));
+      int i,j;
+      int same = 0;
+      for(i=0;i<sLen;i++){
+          if(S[i]==T[0]) same++;
+          a[0][i] = same;
+      }
+      for(i=1;i<tLen;i++){
+          for(j=1;j<sLen;j++){
+              if(i>j) continue;
+              if(T[i] != S[j]){
+                  a[i][j] = a[i][j-1];
+              }else{
+                  a[i][j] = a[i][j-1] + a[i-1][j-1];
+              }
+          }
+      }
+      return a[tLen-1][sLen-1];
+    }
+ 
+};

@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void merge(int A[], int m, int B[], int n) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        for(int i=m;i<m+n;i++){
+            A[i] = B[i-m];
+        }
+        quickSort(A,0,m+n-1);
+    }
+    void quickSort(int*a,int begin,int end){
+        if(begin>=end) return;
+        int curV=a[end];
+        int i=begin,j=end;
+        int tmp;
+        while(i<j){
+            if(a[i]<=curV) i++;
+            else{
+                a[j] = a[i];
+                a[i] = a[j-1];
+                j--;
+            }
+        }
+        a[i] = curV;
+        quickSort(a,begin,i-1);
+        quickSort(a,i+1,end);
+        
+    }
+};
