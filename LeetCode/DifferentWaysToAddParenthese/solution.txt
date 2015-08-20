@@ -1,0 +1,99 @@
+class Solution {
+
+public:
+
+    bool isNumber(string str){
+
+    	int size = str.size();
+
+    	for(int i=0;i<size;i++){
+
+    		if(str[i]=='+' || str[i]=='-' || str[i]=='*'){			
+
+    			return false;
+
+    		}
+
+    	}
+
+    	return true;
+
+    }
+
+
+
+    void combine(vector<int>& ret, vector<int>& left, vector<int>& right,char op){
+
+      	int l = left.size();
+
+    	int r = right.size();
+
+    	for(int i=0;i<l;i++){
+
+    		for(int j=0;j<r;j++){
+
+    			if(op == '+') ret.push_back(left[i]+right[j]);
+
+    			if(op == '-') ret.push_back(left[i]-right[j]);
+
+    			if(op == '*') ret.push_back(left[i]*right[j]);
+
+    		}
+
+    	}
+
+    }    
+
+
+
+    vector<int> diffWaysToCompute(string input) {
+
+    	vector<int> ret;	
+
+    	vector<int> left;
+
+    	vector<int> right;
+
+    	string left_str;
+
+    	string right_str;
+
+    	int size = input.size();
+
+    	if(size == 0) return ret;
+
+    	
+
+    	if(isNumber(input)){ //if the string is a number
+
+    		ret.push_back(atoi(input.c_str()));
+
+    		return ret;
+
+    	}else{
+
+    		for(int i=0; i<size; i++){
+
+    			if(input[i]=='+' || input[i]=='-' || input[i]=='*'){
+
+    				left_str = input.substr(0,i);
+
+    				right_str = input.substr(i+1, size-i-1);
+
+    				left = diffWaysToCompute(left_str);
+
+    				right = diffWaysToCompute(right_str);
+
+    				combine(ret, left, right, input[i]);			
+
+    			}			
+
+    		}
+
+    	}
+
+    	return ret;		        
+
+    }
+
+};
