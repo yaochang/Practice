@@ -1,0 +1,67 @@
+class Solution {
+
+public:
+
+    bool isAnagram(string s, string t) {
+
+        int slen = s.length();
+
+        int tlen = t.length();
+
+        if(slen != tlen) return false;
+
+        std::map<char, int> smap;
+
+        std::map<char, int> tmap;
+
+        for(int i=0;i<slen;i++){
+
+            if(smap.find(s[i]) != smap.end()){
+
+                smap[s[i]] = smap[s[i]] + 1;
+
+            }else{
+
+                smap[s[i]] = 1;
+
+            }
+
+            
+
+            if(tmap.find(t[i]) != tmap.end()){
+
+                tmap[t[i]] = tmap[t[i]] + 1;
+
+            }else{
+
+                tmap[t[i]] = 1;
+
+            }
+
+        }
+
+        
+
+        if(smap.size() != tmap.size()) return false;
+
+        
+
+        std::map<char,int>::iterator tmp;
+
+        for(std::map<char,int>::iterator it=smap.begin(); it!=smap.end();++it){
+
+            tmp = tmap.find(it->first);
+
+            if(it->second != tmp->second) return false;
+
+        }
+
+        return true;
+
+            
+
+        
+
+    }
+
+};

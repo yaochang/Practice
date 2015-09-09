@@ -1,0 +1,29 @@
+ass Solution {
+public:
+string getPermutation(int n, int k) {
+    static int factorial[10] = {
+        1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880
+    };
+
+    bool visited[n+1];
+    memset(visited, 0, sizeof(visited));
+
+    -- k;
+    k = k % factorial[n];
+
+    string result;
+
+    for (-- n; n >= 0; -- n) {
+        int c = k / factorial[n];
+        int i;
+        for (i = 1; c >= 0; ++ i) {
+            if (!visited[i]) -- c;
+        }
+        visited[--i] = true;
+
+        result.push_back('0' + i);
+        k = k % factorial[n];
+    }
+    return result;
+}
+};
